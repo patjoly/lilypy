@@ -1,0 +1,36 @@
+% ===== Guitar Global Definitions =====
+
+#(define RH rightHandFinger)
+
+rsh = #(define-music-function
+    (parser location move)
+    (number?)
+#{
+  \once \override Voice.Rest.X-offset = #move
+#})
+ 
+startB = #(define-event-function (txt1)(markup?)
+          #{
+           \tweak bound-details.left.text \markup\normal-text\tiny $txt1
+           \tweak dash-period 0.6 %\tweak style #'line
+           \tweak bound-details.left.stencil-align-dir-y #0
+           \tweak bound-details.left-broken.text ##f
+           \tweak bound-details.left-broken.attach-dir -1
+           \tweak bound-details.left-broken.padding 1.5
+           \tweak bound-details.right.padding -1.5 %pos x du trait vertical
+           \tweak bound-details.right.attach-dir 2
+           \tweak bound-details.right-broken.text ##f
+		   \tweak staff-padding 5
+		   % ... PJ: I added the staff-padding (the default is #0.8 I think)
+           \tweak bound-details.right.text
+             \markup
+               \with-dimensions #'(0 . 0) #'(-.3 . 0)
+               \draw-line #'(0 . -1)
+           \startTextSpan
+          #})
+
+stopB=\stopTextSpan
+
+Rit  = { \override TextSpanner.bound-details.left.text = \markup { \upright "rit " } }
+Rall = { \override TextSpanner.bound-details.left.text = \markup { \small \italic "rall " } }
+

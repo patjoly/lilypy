@@ -1,0 +1,28 @@
+\score {
+  <<
+    \new Staff = "transposed" {
+      \clef treble
+      \transposition bes
+      \key {{ key }} \{{ mode }}
+
+      {
+        c'4 d' e' f'
+      }
+    }
+
+    {% if concert %}
+    \new Staff = "concert" {
+      \clef treble
+      \key {{ key }} \{{ mode }}
+
+      {
+        % concert pitch version
+        c'4 d' e' f'
+      }
+    }
+    {% endif %}
+  >>
+
+  % \midi { }
+  \layout { }
+}

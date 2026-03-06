@@ -1,0 +1,27 @@
+\version "2.24.1"
+
+{% if preamble_template %}
+{% include preamble_template %}
+{% endif %}
+
+\header {
+  title    = \markup { \override #'((font-name . "Garamond") (font-size . 2)) "{{ title }}" }
+  % title = "{{ title }}"
+  composer = "{{ composer }}"
+  arranger = \markup { \small "{{ arranger }}" }
+  % opus     = \markup { \tiny "(1900-1977)" }
+  % tagline  = \markup { \abs-fontsize #8 { "Source:" { \italic "Ten Brazilian Folk Tunes," } "no.8"} }
+}
+
+\paper {
+  system-system-spacing =
+    #'((basic-distance . 20 )
+       (minimum-distance . 4)
+       (padding . 2)
+       (stretchability . 60)) % defaults: 12, 8, 1, 60
+    #(set-paper-size "letter")
+}
+
+#(set-global-staff-size 24)
+
+{% include score_template %}

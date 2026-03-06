@@ -1,0 +1,14 @@
+[project]
+name = 'lilypy'
+version = '0.1.0'
+dependencies = [
+    'jinja2',
+    'python-ly',
+]
+
+[project.scripts]
+lilypy = 'lilypy.cli:main'
+
+[tool.setuptools.package-data]
+lilypy = ['templates/**/*.j2']
+

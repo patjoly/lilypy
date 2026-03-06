@@ -1,0 +1,24 @@
+\score {
+  \new PianoStaff <<
+    \new Staff = "right" {
+      \clef treble
+      \key {{ key }} \{{ mode }}
+
+      {
+        c''4 d'' e'' f''
+      }
+    }
+
+    \new Staff = "left" {
+      \clef bass
+      \key {{ key }} \{{ mode }}
+
+      {
+        c4 d e f
+      }
+    }
+  >>
+
+  % \midi { }
+  \layout { }
+}
