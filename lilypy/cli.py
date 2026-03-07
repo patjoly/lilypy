@@ -14,11 +14,17 @@ def main():
     new_parser.add_argument('--title', default='Untitled')
     new_parser.add_argument('--composer', default='')
     new_parser.add_argument('--arranger', default='')
+    new_parser.add_argument('--opus', default='')
     new_parser.add_argument('--output', required=True)
     new_parser.add_argument(
         "--concert",
         action="store_true",
         help="Include concert pitch staff (if supported)"
+    )
+    new_parser.add_argument(
+        "--lyrics",
+        action="store_true",
+        help="Include lyrics within a staff (if supported)"
     )
 
     # convert command

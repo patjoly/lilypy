@@ -1,28 +1,75 @@
-\score {
-  <<
-    \new Staff = "transposed" {
-      \clef treble
-      \transposition bes
-      \key {{ key }} \{{ mode }}
-
-      {
-        c'4 d' e' f'
-      }
-    }
-
-    {% if concert %}
-    \new Staff = "concert" {
-      \clef treble
-      \key {{ key }} \{{ mode }}
-
-      {
-        % concert pitch version
-        c'4 d' e' f'
-      }
-    }
-    {% endif %}
-  >>
-
-  % \midi { }
-  \layout { }
+\layout {
+  \context { \Score
+    \override MetronomeMark.padding   = #5
+    \override MetronomeMark.font-size = #-3
+  }
+  \context { \Staff
+    \override StaffSymbol.thickness   = #0.5
+    \override TimeSignature.style     = #'numbered
+  }
+  \context { \StaffGroup
+    \consists "Instrument_name_engraver"
+  }
 }
+
+TrackAVoiceAMusic = #(define-music-function (parser location inTab) (boolean?)
+#{
+  \relative c' {
+    \clef treble
+    \key {{ key }} \{{ mode }}
+    \tempo "Optional name" 4=144
+    \time 4/4
+
+    c4 d e f
+  }
+#})
+
+TrackAVoiceBMusic = #(define-music-function (parser location inTab) (boolean?)
+#{
+  {% if concert %}
+  \transpose b a
+  \TrackAVoiceAMusic ##f
+  {% endif %}
+#})
+
+{% if lyrics %}
+TrackALyrics = \lyricmode {
+  \set ignoreMelismata = ##t
+  da doo doo doo
+  \unset ignoreMelismata
+}
+{% endif %}
+
+TrackAStaff = \new Staff <<
+  \context Voice = "TrackAVoiceAMusic" {
+    \TrackAVoiceAMusic ##f
+  }
+>>
+
+{% if concert %}
+TrackAStaffB = \new Staff <<
+  \context Voice = "TrackAVoiceBMusic" {
+    \TrackAVoiceBMusic ##f
+  }
+>>
+{% endif %}
+
+TrackAStaffGroup = \new StaffGroup <<
+  \TrackAStaff
+  {% if lyrics %}
+  \new Lyrics = "foo"
+  \context Lyrics = "foo" {
+    \lyricsto "TrackAVoiceAMusic" {
+      \TrackALyrics
+    }
+  }
+  {% endif %}
+  {% if concert %}
+  \TrackAStaffB
+  {% endif %}
+>>
+
+\score {
+  \TrackAStaffGroup
+}
+

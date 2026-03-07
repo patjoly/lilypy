@@ -13,9 +13,11 @@ def new_file(args):
         title=args.title,
         composer=args.composer,
         arranger=args.arranger,
+        opus=args.opus,
         key=args.key,
         mode=args.mode,
         concert=args.concert,
+        lyrics=args.lyrics,
     )
 
     with open(args.output, "w") as f:

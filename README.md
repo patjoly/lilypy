@@ -15,7 +15,11 @@ python -m pip install .
 Once installed, you can run the CLI:
 
 ```
-lilypy
+lilypy new --instrument guitar  --key g --mode minor --title "This one" --composer "Sor" --opus "Op.30, no.6" --output "Sor 30 no 6.ly"
+lilypy new --instrument trumpet --key f --mode major --title "My Piece" --composer "Mendelssohn, Felix" --output "My Piece.ly"
+lilypy new --instrument trumpet --key f --mode major --title "My Piece" --composer "Mendelssohn, Felix" --output "My Piece.ly" --concert --lyrics
+
+lilypy convert --relative ...   # convert: not implemented yet
 ```
 
 Check the help for available options:
@@ -35,7 +39,7 @@ cli.main()
 
 ## Dependencies
 
-- [Jinja2](https://pypi.org/project/Jinja2/) – for templating  
+- [Jinja2](https://pypi.org/project/Jinja2/) – for templating
 - [python-ly](https://pypi.org/project/python-ly/) – for parsing and processing LilyPond files
 
 ## License
