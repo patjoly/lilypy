@@ -1,13 +1,75 @@
-\score {
-  \new Staff {
-    \clef "treble_8"
-    \key {{ key }} \{{ mode }}
-
-    {
-      % Guitar music here
-      c'4 d' e' f'
-    }
+\layout {
+  \context { \Score
+    \override MetronomeMark.padding   = #6
+    \override MetronomeMark.font-size = #-3
   }
+  \context { \Staff
+    \override StaffSymbol.thickness   = #0.5
+    \override TimeSignature.style     = #'numbered
+    \consists Merge_rests_engraver
 
-  \layout { }
+    \override Fingering.font-name        = #"Garamond"
+    \override StrokeFinger.font-name     = #"Clear Sans Italic"
+    \override StrokeFinger.font-size     = #-4
+    \override Fingering.add-stem-support = #only-if-beamed
+    \override StrokeFinger.avoid-slur    = #'inside
+    % the above is to avoid a warning, not even sure what it does
+  }
+  \context { \StaffGroup
+    \consists "Instrument_name_engraver"
+  }
 }
+
+voiceOne = \new Voice {
+  \voiceOne
+  \set fingeringOrientations    = #'(left)
+  \set strokeFingerOrientations = #'(up)
+  \set fontSize = #-1   % make note heads smaller
+
+  \relative c' {
+    <c e g c>4 f \RH #2 g \RH #3 b \RH #4 <g c e>1 \bar "|."
+  }
+}
+
+voiceTwo = \new Voice {
+  \voiceTwo
+  \set fingeringOrientations    = #'(left)
+  \set strokeFingerOrientations = #'(down)
+  \set fontSize = #-1   % make note heads smaller
+
+  \relative c' {
+    s1 c \RH #1
+  }
+}
+
+voiceFour = \new Voice {     % even numbered voices have the stems down (use \voiceThree instead to have stems up)
+  \voiceFour
+  \set fingeringOrientations    = #'(left)
+  \set strokeFingerOrientations = #'(up)
+  \set stringNumberOrientations = #'(down)
+  \set fontSize = #-1   % make note heads smaller
+
+  \mergeDifferentlyHeadedOn
+  \mergeDifferentlyDottedOn
+  \override NoteColumn.ignore-collision = ##t
+
+  \relative c' {
+    s1
+  }
+}
+
+\score {
+  \new Staff <<
+    \clef treble
+    \key {{ key }} \{{ mode }}
+    \tempo 4 = 78-84
+    \time 4/4
+
+    % \partial 8
+
+    \voiceOne
+    \voiceTwo
+    \voiceFour
+  >>
+}
+

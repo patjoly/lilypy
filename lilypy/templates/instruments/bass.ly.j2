@@ -1,7 +1,33 @@
-{
-  % Bass template
+\layout {
+  \context { \Score
+    \override MetronomeMark.padding   = #6
+    \override MetronomeMark.font-size = #-3
+  }
+  \context { \Staff
+    \override StaffSymbol.thickness   = #0.5
+    \override TimeSignature.style     = #'numbered
+    \consists Merge_rests_engraver
 
-  c4 d e f
+    \override Fingering.font-name        = #"Garamond"
+    \override StrokeFinger.font-name     = #"Clear Sans Italic"
+    \override StrokeFinger.font-size     = #-4
+    \override Fingering.add-stem-support = #only-if-beamed
+    \override StrokeFinger.avoid-slur    = #'inside
+    % the above is to avoid a warning, not even sure what it does
+  }
+}
 
-  \layout { }
+\score {
+  \new Staff {
+    \clef bass
+    \key {{ key }} \{{ mode }}
+    \tempo 4 = 78-84
+    \time 4/4
+
+    % \partial 8
+
+    {
+      c4 d e f \bar "|."
+    }
+  }
 }
