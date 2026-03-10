@@ -12,7 +12,7 @@
   }
 }
 
-TrackAVoiceAMusic = #(define-music-function (parser location inTab) (boolean?)
+TrackAMusicFuncA = #(define-music-function (parser location inTab) (boolean?)
 #{
   \relative c' {
     \clef treble
@@ -24,11 +24,11 @@ TrackAVoiceAMusic = #(define-music-function (parser location inTab) (boolean?)
   }
 #})
 
-TrackAVoiceBMusic = #(define-music-function (parser location inTab) (boolean?)
+TrackAMusicFuncB = #(define-music-function (parser location inTab) (boolean?)
 #{
   {% if concert %}
   \transpose b a
-  \TrackAVoiceAMusic ##f
+  \TrackAMusicFuncA ##f
   {% endif %}
 #})
 
@@ -40,26 +40,26 @@ TrackALyrics = \lyricmode {
 }
 {% endif %}
 
-TrackAStaff = \new Staff <<
-  \context Voice = "TrackAVoiceAMusic" {
-    \TrackAVoiceAMusic ##f
+TrackAStaffA = \new Staff <<
+  \context Voice = "TrackAVoiceA" {
+    \TrackAMusicFuncA ##f
   }
 >>
 
 {% if concert %}
 TrackAStaffB = \new Staff <<
-  \context Voice = "TrackAVoiceBMusic" {
-    \TrackAVoiceBMusic ##f
+  \context Voice = "TrackAVoiceB" {
+    \TrackAMusicFuncB ##f
   }
 >>
 {% endif %}
 
 TrackAStaffGroup = \new StaffGroup <<
-  \TrackAStaff
+  \TrackAStaffA
   {% if lyrics %}
   \new Lyrics = "foo"
   \context Lyrics = "foo" {
-    \lyricsto "TrackAVoiceAMusic" {
+    \lyricsto "TrackAVoiceA" {
       \TrackALyrics
     }
   }
