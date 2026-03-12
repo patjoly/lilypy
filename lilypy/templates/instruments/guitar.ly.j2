@@ -26,8 +26,10 @@ voiceOne = \new Voice {
   \set strokeFingerOrientations = #'(up)
   \set fontSize = #-1   % make note heads smaller
 
-  \relative c' {
-    <c e g c>4 f \RH #2 g \RH #3 b \RH #4 <g c e>1 \bar "|."
+  \relative c'' {
+    \slurDown <b \RH #3 >16 <a \RH #2 > <gis \RH #3 > (a) r a <cis-3> e r8 <fis-4 \RH #4 >16 (e) \break
+    <b \RH #3 >2 f'8\rest <fis-2 \RH #4 >16 (e)
+    \bar "|."
   }
 }
 
@@ -37,8 +39,9 @@ voiceTwo = \new Voice {
   \set strokeFingerOrientations = #'(down)
   \set fontSize = #-1   % make note heads smaller
 
-  \relative c' {
-    s1 c \RH #1
+  \relative c'' {
+    a,4 a a8 c\rest
+    e,4 b'-2 e,8 c'8\rest
   }
 }
 
@@ -53,8 +56,10 @@ voiceFour = \new Voice {     % even numbered voices have the stems down (use \vo
   \mergeDifferentlyDottedOn
   \override NoteColumn.ignore-collision = ##t
 
-  \relative c' {
-    s1
+  \relative c'' {
+    s2.
+    e,16\rest <gis-1 \RH #2 > \set strokeFingerOrientations = #'(down)
+    <e-3 \RH #1 > gis b\rest gis e gis f4\rest \set strokeFingerOrientations = #'(up)
   }
 }
 
@@ -62,8 +67,8 @@ voiceFour = \new Voice {     % even numbered voices have the stems down (use \vo
   \new Staff <<
     \clef treble
     \key {{ key }} \{{ mode }}
-    \tempo 4 = 78-84
-    \time 4/4
+    \tempo 4 = 56-63
+    \time 3/4
 
     % \partial 8
 
