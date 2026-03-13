@@ -4,11 +4,12 @@
 {% endif %}
 
 \header {
-  title     = \markup { \override #'((font-name . "Garamond") (font-size . 2)) "{{ title }}" }
-  composer  = "{{ composer }}"
-  arranger  = \markup { \small "{{ arranger }}" }
-  opus      = \markup { \tiny "{{ opus }}" }
-  tagline   = ##f    % no lilypond footer
+  title      = \markup { \override #'( (font-name . "Garamond") (font-size . 2) )  "{{ title }}" }
+  subtitle   = \markup { \override #'( (font-series . normal) (font-size . 0.25) ) \italic "{{ subtitle }}" }
+  composer   = "{{ composer }}"
+  arranger   = \markup { \small "{{ arranger }}" }
+  opus       = \markup { \tiny  "{{ opus }}" }
+  tagline    = ##f    % no lilypond footer
   % tagline  = \markup { \abs-fontsize #8 { "Source:" { \italic "Name of Document," } "no.x"} }
 }
 

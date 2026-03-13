@@ -11,6 +11,7 @@ def new_file(args):
     content = render_template(
         instrument=instrument,
         title=args.title,
+        subtitle=args.subtitle,
         composer=args.composer,
         arranger=args.arranger,
         opus=args.opus,

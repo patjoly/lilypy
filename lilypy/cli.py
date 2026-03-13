@@ -12,6 +12,7 @@ def main():
     new_parser.add_argument('--key', default='c')
     new_parser.add_argument('--mode', default='major')
     new_parser.add_argument('--title', default='Untitled')
+    new_parser.add_argument('--subtitle', default='')
     new_parser.add_argument('--composer', default='')
     new_parser.add_argument('--arranger', default='')
     new_parser.add_argument('--opus', default='')
