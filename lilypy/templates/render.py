@@ -36,6 +36,7 @@ def render_template(
 
     return template.render(
         title=title,
+        instrument=instrument,
         composer=composer,
         arranger=arranger,
         key=key,

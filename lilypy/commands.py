@@ -10,6 +10,7 @@ def new_file(args):
 
     content = render_template(
         instrument=instrument,
+        instrument_header=instrument.name,
         title=args.title,
         subtitle=args.subtitle,
         composer=args.composer,
