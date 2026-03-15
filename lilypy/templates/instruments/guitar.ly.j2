@@ -1,4 +1,7 @@
 \layout {
+  \context { \Voice
+	\remove Finger_glide_engraver
+  }
   \context { \Score
     \override MetronomeMark.padding   = #6
     \override MetronomeMark.font-size = #-3
@@ -7,10 +10,12 @@
     \override StaffSymbol.thickness   = #0.5
     \override TimeSignature.style     = #'numbered
     \consists Merge_rests_engraver
+	\consists Finger_glide_engraver
 
     \override Fingering.font-name        = #"Garamond"
     \override StrokeFinger.font-name     = #"Clear Sans Italic"
     \override StrokeFinger.font-size     = #-4
+	\override StrokeFinger.padding       = #0.5     % 0.5 is the default, adjust if necessary
     \override Fingering.add-stem-support = #only-if-beamed
     \override StrokeFinger.avoid-slur    = #'inside
     % the above is to avoid a warning, not even sure what it does
@@ -26,6 +31,14 @@ voiceOne = \new Voice {
   \set strokeFingerOrientations = #'(up)
   \set fontSize = #-1   % make note heads smaller
 
+  % StrokeFinger.staff-padding
+  %  . defaults work well but tweaks may be necessary with multiple voices
+  %  . uncomment and adjust as necessary, here and/or in other voices
+  %\override StrokeFinger.staff-padding = #3.5
+
+  % other useful idioms:
+  % \once \override NoteColumn.force-hshift = 0.25 <insert_note_here>
+
   \relative c' {
     <c e g c>4 f \RH #2 g \RH #3 b \RH #4 <g c e>1 \bar "|."
   }
@@ -36,6 +49,12 @@ voiceTwo = \new Voice {
   \set fingeringOrientations    = #'(left)
   \set strokeFingerOrientations = #'(down)
   \set fontSize = #-1   % make note heads smaller
+
+  %\override StrokeFinger.staff-padding = #1.5
+
+  % if there are fingers other than thumbs in voiceTwo, these will be necessary to temporarily set and reset:
+  %	\set strokeFingerOrientations = #'(up)
+  %	\set strokeFingerOrientations = #'(down)
 
   \relative c' {
     s1 c \RH #1
@@ -48,6 +67,8 @@ voiceFour = \new Voice {     % even numbered voices have the stems down (use \vo
   \set strokeFingerOrientations = #'(up)
   \set stringNumberOrientations = #'(down)
   \set fontSize = #-1   % make note heads smaller
+
+  %\override StrokeFinger.staff-padding = #2.5
 
   \mergeDifferentlyHeadedOn
   \mergeDifferentlyDottedOn
